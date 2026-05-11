@@ -2,7 +2,7 @@ name: CI/CD Backend
 
 on:
   push:
-    branches: [dev]
+    branches: [main]
 
 env:
   REGISTRY: ghcr.io
@@ -30,18 +30,18 @@ jobs:
         with:
           context: ./message-service
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/message-service:dev
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/message-service:prod
 
       - name: Build WebSocket Gateway
         uses: docker/build-push-action@v5
         with:
           context: ./ws-gateway
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/ws-gateway:dev
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/ws-gateway:prod
 
       - name: Build Presence Service
         uses: docker/build-push-action@v5
         with:
           context: ./presence-service
           push: true
-          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/presence-service:dev
+          tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}/presence-service:prod
